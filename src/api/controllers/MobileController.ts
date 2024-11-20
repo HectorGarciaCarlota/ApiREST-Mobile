@@ -13,9 +13,8 @@ const create = (req: Request, res: Response) => {
 }
 
 const update = (req: Request, res: Response) => {
-  const { mobile , found } = res.locals
+  const { mobile , found } = res.locals as { mobile: Mobile, found: Mobile}
 
-  found.
 
 
 }

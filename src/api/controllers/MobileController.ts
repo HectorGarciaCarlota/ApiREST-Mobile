@@ -4,6 +4,8 @@ import { mobiles } from '../models/Mobiles';
 import MobileDTO from '../models/Mobile.dto';
 
 const create = (req: Request, res: Response) => {
+  console.log("Creating mobile with data:", res.locals.mobile);
+
   const local = res.locals.mobile
 
   const mobile = new Mobile (local.model, Number(local.price), Number(local.inches), Number(local.ram), Number(local.cpu));

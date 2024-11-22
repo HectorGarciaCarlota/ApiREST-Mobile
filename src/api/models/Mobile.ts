@@ -22,6 +22,20 @@ class Mobile {
   get _id(): number {
     return this.#_id;
   }
+
+  updateAll({model = this.#_model, price = this.#_price, inches= this.#_inches, ram = this.#_ram, cpu= this.#_cpu} = {}): boolean {
+    try {
+      this.#_model = model;
+      this.#_price = price;
+      this.#_inches = inches;
+      this.#_ram = ram;
+      this.#_cpu = cpu;
+      this.#_cpu = cpu;
+      return true;
+    } catch (error) {
+      return false
+    }
+  }
 }
 
 export default Mobile;

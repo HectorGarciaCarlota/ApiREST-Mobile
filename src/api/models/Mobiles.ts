@@ -1,3 +1,3 @@
 import Mobile from './Mobile';
 
-export const mobiles: Mobile[] = [];
+export let mobiles: Mobile[] = [];

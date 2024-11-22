@@ -31,3 +31,19 @@ const MobileMiddlewareUpdate = (req: Request, res: Response, next: NextFunction)
 
   next();
 }
+
+const MobileMiddlewareDelete = (req: Request, res: Response, next: NextFunction) => {
+  const id = Number(req.params.id);
+
+  const found = mobiles.find(mobile => mobile._id === id);
+
+  if (!found) return res.status(404).send({
+    "error": "not found",
+  });
+
+  res.locals.found = found;
+
+  next();
+}
+
+export { MobileMiddlewareCreate, MobileMiddlewareUpdate, MobileMiddlewareDelete };

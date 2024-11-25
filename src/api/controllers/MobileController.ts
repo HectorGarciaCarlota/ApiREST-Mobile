@@ -6,14 +6,23 @@ import MobileDTO from '../models/Mobile.dto';
 const create = (req: Request, res: Response) => {
   console.log("Creating mobile with data:", res.locals.mobile);
 
-  const local = res.locals.mobile
+  const local = res.locals.mobile;
 
-  const mobile = new Mobile (local.model, Number(local.price), Number(local.inches), Number(local.ram), Number(local.cpu));
+  const mobile = new Mobile(
+    String(local.model),
+    Number(local.price),
+    Number(local.inches),
+    Number(local.ram),
+    Number(local.cpu)
+  );
 
-  mobiles.push(mobile)
+  mobiles.push(mobile);
 
-  return res.status(200).json(mobile);
-}
+  console.log("Created mobile:", mobile.getDetails());
+
+  return res.status(200).json(mobile.getDetails());
+};
+
 
 const update = (req: Request, res: Response) => {
   const { mobile , found } = res.locals as { mobile: MobileDTO, found: Mobile};
@@ -26,9 +35,13 @@ const update = (req: Request, res: Response) => {
 }
 
 const remove = (req: Request, res: Response) => {
-  const found  = res.locals as  Mobile ;
+  const found  = res.locals.found as Mobile ;
 
-  mobiles = mobiles.filter((mobile) => mobile._id !== found._id);
+  const index = mobiles.findIndex((mobile) => mobile._id === found._id);
+
+  if (index !== -1) {
+    mobiles.splice(index, 1);
+  }
 
   return res.status(200).json({
     message: "Mobile deleted successfully",
@@ -38,8 +51,8 @@ const remove = (req: Request, res: Response) => {
 
 const show = (req: Request, res: Response) => {
   return res.status(200).json({
-    "mobiles": mobiles,
+    mobiles: mobiles.map((mobile) => mobile.getDetails()),
   });
-}
+};
 
 export { create, update, remove, show };

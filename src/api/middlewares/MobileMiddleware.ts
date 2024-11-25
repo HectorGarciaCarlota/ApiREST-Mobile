@@ -22,7 +22,7 @@ const MobileMiddlewareUpdate = (req: Request, res: Response, next: NextFunction)
 
   const found = mobiles.find(mobile => mobile._id === id);
 
-  if (!found) return res.status(404).send({
+  if (found === undefined) return res.status(404).send({
     "error": "not found",
   })
 
@@ -35,9 +35,11 @@ const MobileMiddlewareUpdate = (req: Request, res: Response, next: NextFunction)
 const MobileMiddlewareDelete = (req: Request, res: Response, next: NextFunction) => {
   const id = Number(req.params.id);
 
+  console.log(id);
+
   const found = mobiles.find(mobile => mobile._id === id);
 
-  if (!found) return res.status(404).send({
+  if (found === undefined) return res.status(404).send({
     "error": "not found",
   });
 

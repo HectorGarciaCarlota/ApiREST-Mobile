@@ -21,6 +21,17 @@ class Mobile {
     return this.#_id;
   }
 
+  getDetails() {
+    return {
+      id: this.#_id,
+      model: this.#_model,
+      price: this.#_price,
+      inches: this.#_inches,
+      ram: this.#_ram,
+      cpu: this.#_cpu,
+    };
+  }
+
   updateAll({ model = this.#_model, price = this.#_price, inches = this.#_inches, ram = this.#_ram, cpu = this.#_cpu } = {}): boolean {
     try {
       this.#_model = model;
